@@ -12,13 +12,16 @@ export const Container = styled.div`
 export const LoginCard = styled.div`
   background-color: #f9f9f9;
   box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
-  padding: 2rem 1rem 0 1rem;
+  padding: 2rem 1rem;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   max-width: 350px;
+  @media screen and (min-width: 768px) {
+    padding: 3rem 2rem;
+  }
 `
 export const LoginLogo = styled.img`
   width: 110px;
@@ -36,7 +39,7 @@ export const Form = styled.form`
 export const InputField = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
   width: 100%;
 
   ${props =>
@@ -45,16 +48,41 @@ export const InputField = styled.div`
       flex-direction: row;
       width: unset;
       align-self: flex-start;
+      align-items: center;
+      gap: 0.2rem;
     `}
 `
 
-export const Label = styled.label``
-
-export const Input = styled.input`
-  padding: 0.5rem 1rem;
+export const Label = styled.label`
+  color: #94a3b8;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: -0.5px;
+  &[for='checkbox'] {
+    color: #212121;
+    font-size: 0.85rem;
+    user-select: none;
+  }
 `
 
-export const CheckBox = styled.input.attrs({type: 'CheckBox'})``
+export const Input = styled.input`
+  padding: 0.7rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 5px;
+  color: #231f20;
+  &::placeholder {
+    color: #94a3b8;
+  }
+  &:focus {
+    outline: 1px solid #ff0b37;
+    box-shadow: 0 0 10px 1px #ff0b37;
+  }
+`
+
+export const CheckBox = styled.input.attrs({type: 'CheckBox'})`
+  width: 1rem;
+  aspect-ratio: 1/1;
+`
 
 export const Button = styled.button`
   align-self: stretch;
@@ -86,19 +114,28 @@ export const Button = styled.button`
   touch-action: manipulation;
   box-shadow: -6px 8px 10px rgba(81, 41, 10, 0.1),
     0px 2px 2px rgba(81, 41, 10, 0.2);
-  // margin-bottom: 0;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    position: relative;
+    transform: translateY(-3px);
+  }
 
   &:active {
-    background-color: #f3f4f6;
-    box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15),
-      0px 1px 1px rgba(81, 41, 10, 0.15);
-    transform: translateY(0.125rem);
+    background: #f3f4f6;
+    transform: translateY(3px);
   }
 
   &:focus {
-    box-shadow: rgba(72, 35, 7, 0.46) 0 0 0 4px,
-      -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
+    background: #f3f4f6;
   }
 `
 
-export const ErrorMessage = styled.p``
+export const ErrorMessage = styled.p`
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #9e0303;
+`
