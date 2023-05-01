@@ -1,3 +1,9 @@
-export default function SavedVideos() {
-  return <h1>SavedVideos</h1>
+import Layout from '../Layout'
+
+export default function Trending() {
+  return (
+    <Layout>
+      <div>Saved Videos</div>
+    </Layout>
+  )
 }

@@ -1,3 +1,9 @@
-export default function Gaming() {
-  return <h1>Gaming</h1>
+import Layout from '../Layout'
+
+export default function Trending() {
+  return (
+    <Layout>
+      <div>Gaming</div>
+    </Layout>
+  )
 }

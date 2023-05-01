@@ -1,3 +1,9 @@
+import Layout from '../Layout'
+
 export default function Trending() {
-  return <h1>Trending</h1>
+  return (
+    <Layout>
+      <div>Trending</div>
+    </Layout>
+  )
 }

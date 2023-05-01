@@ -5,7 +5,9 @@ export const Heading = styled.h1``
 export const Paragraph = styled.p``
 
 // Unique
-export const HomeContainer = styled.div``
+export const HomeContainer = styled.div`
+  border: 2px solid green;
+`
 
 export const Banner = styled.div``
 export const BannerLogo = styled.img``
