@@ -5,7 +5,7 @@ export const SidebarContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  width: 30%;
+  min-width: 200px;
 `
 export const NavContainer = styled.ul``
 export const NavItem = styled.li``
