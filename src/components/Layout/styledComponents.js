@@ -6,7 +6,7 @@ export const LayoutContainer = styled.div`
   flex-direction: column;
   height: 100vh;
 `
-export const ContentWrapper = styled.div`
+export const LayoutWrapper = styled.div`
   border: 2px solid black;
   display: flex;
   flex-grow: 1;

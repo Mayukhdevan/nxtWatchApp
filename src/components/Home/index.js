@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import Layout from '../Layout'
 import {
   Paragraph,
+  HomeContentWrapper,
   HomeContainer,
   Banner,
   BannerContentWrapper,
@@ -60,7 +61,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div>
+      <HomeContainer>
         <Banner>
           <BannerContentWrapper>
             <BannerLogo src={LIGHT_LOGO} alt="website logo" />
@@ -68,7 +69,7 @@ export default function Home() {
             <Button>GET IT NOW</Button>
           </BannerContentWrapper>
         </Banner>
-        <HomeContainer>
+        <HomeContentWrapper>
           <SearchInputWrapper>
             <SearchInput
               type="search"
@@ -79,8 +80,8 @@ export default function Home() {
             <SearchButton onClick={handleSearch}>Search</SearchButton>
           </SearchInputWrapper>
           <VideoCardsList videoList={videoList} />
-        </HomeContainer>
-      </div>
+        </HomeContentWrapper>
+      </HomeContainer>
     </Layout>
   )
 }
