@@ -1,16 +1,21 @@
-import {LayoutContainer, LayoutWrapper} from './styledComponents'
+import {useState} from 'react'
+import {
+  LayoutContainer,
+  LayoutWrapper,
+  ContentContainer,
+} from './styledComponents'
 import Header from '../Header'
 import Sidebar from '../Sidebar'
 
-export default function Layout(props) {
-  const {children} = props
+export default function Layout({children}) {
+  const [isNavActive, setIsNavActive] = useState(false)
 
   return (
     <LayoutContainer>
-      <Header />
+      <Header toggleNav={setIsNavActive} />
       <LayoutWrapper>
-        <Sidebar />
-        {children}
+        <Sidebar navStatus={isNavActive} />
+        <ContentContainer navStatus={isNavActive}>{children}</ContentContainer>
       </LayoutWrapper>
     </LayoutContainer>
   )

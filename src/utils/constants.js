@@ -20,6 +20,8 @@ export const LOGIN_API_URL = 'https://apis.ccbp.in/login'
 
 export const HOME_API_URL = 'https://apis.ccbp.in/videos/all?search='
 
+export const VIDEO_ITEM_URL = 'https://apis.ccbp.in/videos/'
+
 export const STATUS = {
   initial: 'INITIAL',
   inProgress: 'IN_PROGRESS',

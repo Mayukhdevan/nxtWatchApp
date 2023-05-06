@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export const VideoCard = styled.li``
+export const VideoCard = styled.li`
+  width: 250px;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+`
 export const CardThumbnail = styled.img`
   width: 100%;
 `

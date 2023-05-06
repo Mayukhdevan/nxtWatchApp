@@ -1,14 +1,10 @@
 import styled, {css} from 'styled-components'
 
-export const HomeContainer = styled.div`
-  // border: 5px solid black;
-  height: 92vh;
-  overflow-y: auto;
-`
 export const HomeContentWrapper = styled.div`
   border: 2px solid green;
   background-color: #f1f5f9;
   flex-grow: 1;
+  padding: 1.5rem;
   @media (min-width: 768px) {
     padding: 1rem;
   }
@@ -42,6 +38,18 @@ export const Button = styled.button`
   color: #181818;
 `
 
-export const SearchInputWrapper = styled.div``
-export const SearchInput = styled.input``
-export const SearchButton = styled.button``
+export const SearchInputWrapper = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
+`
+export const SearchInput = styled.input`
+  padding: 0.5rem;
+  border: 1.5px solid #94a3b8;
+  width: 100%;
+  max-width: 400px;
+`
+export const SearchButton = styled.button`
+  padding: 0.3rem 2rem;
+  border: 1.5px solid #94a3b8;
+  background-color: #e2e8f0;
+`

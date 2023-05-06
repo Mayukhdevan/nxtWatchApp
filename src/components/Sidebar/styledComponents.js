@@ -6,6 +6,15 @@ export const SidebarContainer = styled.div`
   justify-content: space-between;
   height: 100%;
   min-width: 200px;
+  @media (max-width: 767px) {
+    transition: transform 0.5s ease-in-out;
+    min-width: unset;
+    width: 200px;
+    position: absolute;
+    z-index: 10;
+    background-color: lightblue;
+    transform: ${props => !props.navStatus && 'translateX(-100%)'};
+  }
 `
 export const NavContainer = styled.ul``
 export const NavItem = styled.li``

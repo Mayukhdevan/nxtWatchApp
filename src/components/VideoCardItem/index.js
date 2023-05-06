@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import {
   VideoCard,
   CardThumbnail,
@@ -9,19 +10,28 @@ import {
 } from './styledComponents'
 
 export default function VideoCardItem({videoCardItem}) {
-  const {title, thumbnailUrl, channel, viewCount, publishedAt} = videoCardItem
+  const {
+    id,
+    title,
+    thumbnailUrl,
+    channel,
+    viewCount,
+    publishedAt,
+  } = videoCardItem
   return (
     <VideoCard>
-      <CardThumbnail src={thumbnailUrl} alt={channel.name} />
-      <CardDetailsWrapper>
-        <CardLogo src={channel.profileImageUrl} />
-        <TextWrapper>
-          <CardHeading>{title}</CardHeading>
-          <CardPara>
-            {channel.name} • {viewCount} • {publishedAt}
-          </CardPara>
-        </TextWrapper>
-      </CardDetailsWrapper>
+      <Link to={`/videos/${id}`}>
+        <CardThumbnail src={thumbnailUrl} alt={channel.name} />
+        <CardDetailsWrapper>
+          <CardLogo src={channel.profileImageUrl} />
+          <TextWrapper>
+            <CardHeading>{title}</CardHeading>
+            <CardPara>
+              {channel.name} • {viewCount} • {publishedAt}
+            </CardPara>
+          </TextWrapper>
+        </CardDetailsWrapper>
+      </Link>
     </VideoCard>
   )
 }

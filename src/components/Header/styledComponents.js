@@ -26,6 +26,9 @@ export const ThemeButton = styled.button`
 `
 export const UserLogo = styled.img`
   width: 20px;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `
 export const LogoutButton = styled.button`
   outline: none;
@@ -35,4 +38,21 @@ export const LogoutButton = styled.button`
   padding: 0.125rem 0.7rem;
   font-size: 600;
   cursor: pointer;
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+  }
 `
+export const LogoutIconBtn = styled.button`
+  border: none;
+  background: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+export const HamIconBtn = styled(LogoutIconBtn)``

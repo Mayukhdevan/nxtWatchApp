@@ -14,9 +14,9 @@ import {
 } from './styledComponents'
 import {FB_LOGO, TWITTER_LOGO, LINKEDIN_LOGO} from '../../utils/constants'
 
-export default function Sidebar() {
+export default function Sidebar({navStatus}) {
   return (
-    <SidebarContainer>
+    <SidebarContainer navStatus={navStatus}>
       <NavContainer>
         <Link to="/">
           <NavItem>
