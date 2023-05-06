@@ -1,12 +1,11 @@
 import styled, {css} from 'styled-components'
 
 export const HomeContentWrapper = styled.div`
-  border: 2px solid green;
   background-color: #f1f5f9;
   flex-grow: 1;
-  padding: 1.5rem;
+  padding: 1rem;
   @media (min-width: 768px) {
-    padding: 1rem;
+    padding: 1.5rem;
   }
 `
 
@@ -14,7 +13,7 @@ export const Banner = styled.div`
   padding: 0.5rem;
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
   background-size: cover;
-  height: 200px;
+  height: 180px;
 `
 export const BannerContentWrapper = styled.div`
   max-width: 300px;

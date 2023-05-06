@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import {
   VideoCard,
   CardThumbnail,
@@ -20,14 +21,15 @@ export default function VideoCardItem({videoCardItem}) {
   } = videoCardItem
   return (
     <VideoCard>
-      <Link to={`/videos/${id}`}>
+      <Link to={`/videos/${id}`} style={{textDecoration: 'none'}}>
         <CardThumbnail src={thumbnailUrl} alt={channel.name} />
         <CardDetailsWrapper>
           <CardLogo src={channel.profileImageUrl} />
           <TextWrapper>
             <CardHeading>{title}</CardHeading>
             <CardPara>
-              {channel.name} • {viewCount} • {publishedAt}
+              {channel.name} • {viewCount} •{' '}
+              {formatDistanceToNow(new Date(publishedAt))}
             </CardPara>
           </TextWrapper>
         </CardDetailsWrapper>

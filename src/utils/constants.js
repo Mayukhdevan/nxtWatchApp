@@ -28,3 +28,10 @@ export const STATUS = {
   success: 'SUCCESS',
   failure: 'FAILED',
 }
+
+export const ACTIVE_TAB = {
+  home: 'HOME',
+  trending: 'TRENDING',
+  gaming: 'GAMING',
+  savedVideos: 'SAVED_VIDEOS',
+}

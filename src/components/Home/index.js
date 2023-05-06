@@ -48,11 +48,11 @@ const getHomeVideos = async (
       viewCount: eachData.view_count,
       publishedAt: eachData.published_at,
     }))
-    setResStatus(STATUS.success)
     setVideoList([...updatedData])
+    setResStatus(STATUS.success)
   } else {
-    setResStatus(STATUS.failure)
     setErr(data.error_msg)
+    setResStatus(STATUS.failure)
   }
 }
 

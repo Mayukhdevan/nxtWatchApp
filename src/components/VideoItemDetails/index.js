@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import ReactPlayer from 'react-player'
+import {BiDislike, BiLike, BiListPlus} from 'react-icons/bi'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import {STATUS, VIDEO_ITEM_URL} from '../../utils/constants'
 import {
@@ -13,20 +14,16 @@ import {
   ChannelContainer,
   ChannelLogo,
   ChannelTextWrapper,
+  ControlBtnWrapper,
 } from './styledComponents'
 import Layout from '../Layout'
 import LoaderComp from '../LoaderComp'
 
-const getVideoDetails = async (
-  params,
-  setVideoDetails,
-  setResStatus,
-  setErr,
-) => {
+const getVideoDetails = async (id, setVideoDetails, setResStatus, setErr) => {
   setResStatus(STATUS.inProgress)
 
   const jwtToken = Cookies.get('jwt_token')
-  const url = VIDEO_ITEM_URL + params.id
+  const url = VIDEO_ITEM_URL + id
   const options = {
     headers: {
       Authorization: `Bearer ${jwtToken}`,
@@ -52,11 +49,11 @@ const getVideoDetails = async (
       description: data?.video_details?.description,
     }
 
-    setResStatus(STATUS.success)
     setVideoDetails(videoDetails)
+    setResStatus(STATUS.success)
   } else {
-    setResStatus(STATUS.failure)
     setErr(data.error_msg)
+    setResStatus(STATUS.failure)
   }
 }
 
@@ -64,23 +61,28 @@ export default function VideoItemDetails() {
   const [videoDetails, setVideoDetails] = useState({})
   const [resStatus, setResStatus] = useState(STATUS.initial)
   const [err, setErr] = useState('')
+  const [likeDislike, setLikeDislike] = useState({like: false, dislike: false})
+  const [save, setSave] = useState(false)
+
   const params = useParams()
+  const videoId = params.id
 
   useEffect(() => {
-    getVideoDetails(params, setVideoDetails, setResStatus, setErr)
-  }, [])
+    getVideoDetails(videoId, setVideoDetails, setResStatus, setErr)
+  }, [videoId])
 
   const renderVideoDetails = () => {
     const {
-      id,
       title,
       videoUrl,
-      thumbnailUrl,
       channel,
       viewCount,
       publishedAt,
       description,
     } = videoDetails
+    const dateAgo = formatDistanceToNow(new Date(publishedAt), {
+      addSuffix: true,
+    })
 
     return (
       <>
@@ -96,8 +98,54 @@ export default function VideoItemDetails() {
         <div style={{padding: '1rem'}}>
           <Heading>{title}</Heading>
           <Paragraph>
-            {viewCount} • {}
+            {viewCount} • {dateAgo}
           </Paragraph>
+          <ControlBtnWrapper>
+            <ControlButton
+              isActive={likeDislike.like}
+              onClick={() =>
+                setLikeDislike(prevState => ({
+                  like: !prevState.like,
+                  dislike: false,
+                }))
+              }
+            >
+              <BiLike style={{height: '22px', width: '22px'}} />
+              Like
+            </ControlButton>
+            <ControlButton
+              isActive={likeDislike.dislike}
+              onClick={() =>
+                setLikeDislike(prevState => ({
+                  like: false,
+                  dislike: !prevState.dislike,
+                }))
+              }
+            >
+              <BiDislike style={{height: '22px', width: '22px'}} />
+              Dislike
+            </ControlButton>
+            <ControlButton
+              isActive={save}
+              onClick={() => setSave(prevState => !prevState)}
+            >
+              <BiListPlus style={{height: '22px', width: '22px'}} />
+              Save
+            </ControlButton>
+          </ControlBtnWrapper>
+          <Divider />
+          <ChannelContainer>
+            <ChannelLogo src={channel.profileImageUrl} alt={channel.name} />
+            <ChannelTextWrapper>
+              <Paragraph mb="0.5rem" color="#1e293b">
+                {channel.name}
+              </Paragraph>
+              <Paragraph mb="unset">
+                {channel.subscribeCount} subscribers
+              </Paragraph>
+            </ChannelTextWrapper>
+          </ChannelContainer>
+          <Paragraph color="#64748b">{description}</Paragraph>
         </div>
       </>
     )
@@ -111,8 +159,10 @@ export default function VideoItemDetails() {
         return <LoaderComp />
       case STATUS.failure:
         return renderFailureView()
-      default:
+      case STATUS.success:
         return renderVideoDetails()
+      default:
+        return <LoaderComp />
     }
   }
   return <Layout>{renderView()}</Layout>
