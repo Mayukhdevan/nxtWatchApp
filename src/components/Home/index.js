@@ -3,12 +3,7 @@ import Cookies from 'js-cookie'
 import {AiOutlineSearch} from 'react-icons/ai'
 import Layout from '../Layout'
 import {
-  Paragraph,
   HomeContentWrapper,
-  Banner,
-  BannerContentWrapper,
-  BannerLogo,
-  Button,
   SearchInputWrapper,
   SearchInput,
   SearchButton,
@@ -16,6 +11,7 @@ import {
 import {LIGHT_LOGO, HOME_API_URL, STATUS} from '../../utils/constants'
 import VideoCardsList from '../VideoCardsList'
 import LoaderComp from '../LoaderComp'
+import Banner from '../Banner'
 
 const getHomeVideos = async (
   setVideoList,
@@ -61,6 +57,7 @@ export default function Home() {
   const [videoList, setVideoList] = useState([])
   const [resStatus, setResStatus] = useState(STATUS.initial)
   const [err, setErr] = useState('')
+  const [showBanner, setShowBanner] = useState(true)
 
   useEffect(() => {
     getHomeVideos(setVideoList, setErr, setResStatus)
@@ -70,7 +67,9 @@ export default function Home() {
     getHomeVideos(setVideoList, setErr, setResStatus, searchInput)
   }
 
-  const renderVideoCards = () => <VideoCardsList videoList={videoList} />
+  const renderVideoCards = () => (
+    <VideoCardsList flex="row" homeRoute videoList={videoList} />
+  )
 
   const renderFailureView = () => <h1>Failed</h1>
 
@@ -87,13 +86,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <Banner>
-        <BannerContentWrapper>
-          <BannerLogo src={LIGHT_LOGO} alt="website logo" />
-          <Paragraph>Buy NxtWatch Premium prepaid pans with UPI</Paragraph>
-          <Button>GET IT NOW</Button>
-        </BannerContentWrapper>
-      </Banner>
+      {showBanner && <Banner setShowBanner={setShowBanner} />}
       <HomeContentWrapper>
         <SearchInputWrapper>
           <SearchInput

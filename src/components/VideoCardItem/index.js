@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import {
   VideoCard,
+  VideoLink,
   CardThumbnail,
   CardDetailsWrapper,
   CardLogo,
@@ -10,7 +10,7 @@ import {
   TextWrapper,
 } from './styledComponents'
 
-export default function VideoCardItem({videoCardItem}) {
+export default function VideoCardItem({videoCardItem, direction, homeRoute}) {
   const {
     id,
     title,
@@ -20,20 +20,37 @@ export default function VideoCardItem({videoCardItem}) {
     publishedAt,
   } = videoCardItem
   return (
-    <VideoCard>
-      <Link to={`/videos/${id}`} style={{textDecoration: 'none'}}>
-        <CardThumbnail src={thumbnailUrl} alt={channel.name} />
+    <VideoCard direction={direction}>
+      <VideoLink to={`/videos/${id}`} direction={direction}>
+        <CardThumbnail
+          src={thumbnailUrl}
+          alt={channel.name}
+          direction={direction}
+        />
         <CardDetailsWrapper>
-          <CardLogo src={channel.profileImageUrl} />
+          <CardLogo
+            src={channel.profileImageUrl}
+            alt={channel.name}
+            homeRoute={homeRoute}
+          />
           <TextWrapper>
             <CardHeading>{title}</CardHeading>
-            <CardPara>
-              {channel.name} • {viewCount} •{' '}
-              {formatDistanceToNow(new Date(publishedAt))}
-            </CardPara>
+            {homeRoute ? (
+              <CardPara>
+                {channel.name} • {viewCount} •{' '}
+                {formatDistanceToNow(new Date(publishedAt))}
+              </CardPara>
+            ) : (
+              <>
+                <CardPara>{channel.name}</CardPara>
+                <CardPara>
+                  {viewCount} • {formatDistanceToNow(new Date(publishedAt))}
+                </CardPara>
+              </>
+            )}
           </TextWrapper>
         </CardDetailsWrapper>
-      </Link>
+      </VideoLink>
     </VideoCard>
   )
 }

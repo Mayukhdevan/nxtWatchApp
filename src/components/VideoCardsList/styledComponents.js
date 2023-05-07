@@ -5,4 +5,7 @@ export const VideoList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  @media (min-width: 768px) {
+    flex-direction: ${props => props.direction};
+  }
 `

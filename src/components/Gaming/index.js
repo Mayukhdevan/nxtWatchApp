@@ -1,9 +1,92 @@
+import {useState, useEffect} from 'react'
+import Cookies from 'js-cookie'
+import {HiFire} from 'react-icons/hi'
 import Layout from '../Layout'
+import {STATUS, GAMING_API_URL} from '../../utils/constants'
+import VideoCardsList from '../VideoCardsList'
+import LoaderComp from '../LoaderComp'
+import Banner from '../Banner'
+import {
+  GamingContainer,
+  GamingHeader,
+  GamingHeaderLogo,
+  GamingHeaderText,
+  GamingContentWrapper,
+} from './styledComponents'
 
-export default function Trending() {
+const getGamingVideos = async (setVideoList, setErr, setResStatus) => {
+  setResStatus(STATUS.inProgress)
+
+  const jwtToken = Cookies.get('jwt_token')
+  const url = GAMING_API_URL
+  const options = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+    method: 'GET',
+  }
+
+  const response = await fetch(url, options)
+  const data = await response.json()
+  if (response.ok) {
+    const updatedData = data.videos.map(eachData => ({
+      id: eachData.id,
+      title: eachData.title,
+      thumbnailUrl: eachData.thumbnail_url,
+      channel: {
+        name: eachData.channel.name,
+        profileImageUrl: eachData.channel.profile_image_url,
+      },
+      viewCount: eachData.view_count,
+      publishedAt: eachData.published_at,
+    }))
+    setVideoList([...updatedData])
+    setResStatus(STATUS.success)
+  } else {
+    setErr(data.error_msg)
+    setResStatus(STATUS.failure)
+  }
+}
+
+export default function Gaming() {
+  const [videoList, setVideoList] = useState([])
+  const [resStatus, setResStatus] = useState(STATUS.initial)
+  const [err, setErr] = useState('')
+  const [showBanner, setShowBanner] = useState(true)
+
+  useEffect(() => {
+    getGamingVideos(setVideoList, setErr, setResStatus)
+  }, [])
+
+  const renderVideoCards = () => (
+    <VideoCardsList flex="column" homeRoute={false} videoList={videoList} />
+  )
+
+  const renderFailureView = () => <h1>Failed</h1>
+
+  const renderView = () => {
+    switch (resStatus) {
+      case STATUS.inProgress:
+        return <LoaderComp />
+      case STATUS.failure:
+        return renderFailureView()
+      default:
+        return renderVideoCards()
+    }
+  }
+
   return (
     <Layout>
-      <div>Gaming</div>
+      {showBanner && <Banner setShowBanner={setShowBanner} />}
+      <GamingContainer>
+        <GamingHeader>
+          <GamingHeaderLogo>
+            <HiFire style={{color: '#ff0b37'}} />
+          </GamingHeaderLogo>
+          <GamingHeaderText>Trending</GamingHeaderText>
+        </GamingHeader>
+        <GamingContentWrapper>{renderView()}</GamingContentWrapper>
+      </GamingContainer>
     </Layout>
   )
 }

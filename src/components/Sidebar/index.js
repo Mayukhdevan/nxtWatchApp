@@ -1,4 +1,3 @@
-import {useState} from 'react'
 import {AiFillHome} from 'react-icons/ai'
 import {HiFire} from 'react-icons/hi'
 import {SiYoutubegaming} from 'react-icons/si'
@@ -7,62 +6,42 @@ import {
   SidebarContainer,
   NavContainer,
   NavItem,
-  NavLink,
+  Nav,
   Paragraph,
   SocialIcon,
   Footer,
   Wrapper,
 } from './styledComponents'
-import {
-  FB_LOGO,
-  TWITTER_LOGO,
-  LINKEDIN_LOGO,
-  ACTIVE_TAB,
-} from '../../utils/constants'
+import {FB_LOGO, TWITTER_LOGO, LINKEDIN_LOGO} from '../../utils/constants'
 
 export default function Sidebar({navStatus}) {
-  const [activeTab, setActiveTab] = useState(ACTIVE_TAB.home)
-
   return (
     <SidebarContainer navStatus={navStatus}>
       <NavContainer>
-        <NavLink to="/">
-          <NavItem
-            isActive={activeTab === ACTIVE_TAB.home}
-            onClick={() => setActiveTab(ACTIVE_TAB.home)}
-          >
-            <AiFillHome />
+        <Nav exact to="/">
+          <NavItem>
+            <AiFillHome className="active-icon" />
             Home
           </NavItem>
-        </NavLink>
-        <NavLink to="/trending">
-          <NavItem
-            isActive={activeTab === ACTIVE_TAB.trending}
-            onClick={() => setActiveTab(ACTIVE_TAB.trending)}
-          >
-            <HiFire />
+        </Nav>
+        <Nav exact to="/trending">
+          <NavItem>
+            <HiFire className="active-icon" />
             Trending
           </NavItem>
-        </NavLink>
-        <NavLink to="/gaming">
-          <NavItem
-            isActive={activeTab === ACTIVE_TAB.gaming}
-            onClick={() => setActiveTab(ACTIVE_TAB.gaming)}
-          >
-            <SiYoutubegaming />
+        </Nav>
+        <Nav exact to="/gaming">
+          <NavItem>
+            <SiYoutubegaming className="active-icon" />
             Gaming
           </NavItem>
-        </NavLink>
-        <NavLink>
-          <NavItem
-            to="/saved-videos"
-            isActive={activeTab === ACTIVE_TAB.savedVideos}
-            onClick={() => setActiveTab(ACTIVE_TAB.savedVideos)}
-          >
-            <BiListPlus />
+        </Nav>
+        <Nav exact to="/saved-videos">
+          <NavItem>
+            <BiListPlus className="active-icon" />
             Saved videos
           </NavItem>
-        </NavLink>
+        </Nav>
       </NavContainer>
       <Footer>
         <Paragraph fontWeight="700">CONTACT US</Paragraph>
