@@ -51,7 +51,7 @@ export default function Sidebar({navStatus}) {
           <SocialIcon src={LINKEDIN_LOGO} alt="linked in logo" />
         </Wrapper>
         <Paragraph>
-          Enjoy! Now to see your channels and recommendations
+          Enjoy! Now to see your channels and recommendations!
         </Paragraph>
       </Footer>
     </SidebarContainer>

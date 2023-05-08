@@ -12,6 +12,8 @@ import {LIGHT_LOGO, HOME_API_URL, STATUS} from '../../utils/constants'
 import VideoCardsList from '../VideoCardsList'
 import LoaderComp from '../LoaderComp'
 import Banner from '../Banner'
+import EmptyResult from '../EmptyResult'
+import FailureView from '../FailureView'
 
 const getHomeVideos = async (
   setVideoList,
@@ -67,11 +69,14 @@ export default function Home() {
     getHomeVideos(setVideoList, setErr, setResStatus, searchInput)
   }
 
-  const renderVideoCards = () => (
-    <VideoCardsList flex="row" homeRoute videoList={videoList} />
-  )
+  const renderVideoCards = () =>
+    videoList.length === 0 ? (
+      <EmptyResult retry={handleSearch} />
+    ) : (
+      <VideoCardsList flex="row" homeRoute videoList={videoList} />
+    )
 
-  const renderFailureView = () => <h1>Failed</h1>
+  const renderFailureView = () => <FailureView retry={handleSearch} />
 
   const renderView = () => {
     switch (resStatus) {
@@ -94,8 +99,9 @@ export default function Home() {
             placeholder="Search"
             value={searchInput}
             onChange={e => setSearchInput(e.target.value)}
+            onKeyPress={e => e.charCode === 13 && handleSearch()}
           />
-          <SearchButton onClick={handleSearch}>
+          <SearchButton data-testid="searchButton" onClick={handleSearch}>
             <AiOutlineSearch style={{width: '15px', height: '15px'}} />
           </SearchButton>
         </SearchInputWrapper>

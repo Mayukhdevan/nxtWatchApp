@@ -86,13 +86,12 @@ export const CheckBox = styled.input.attrs({type: 'CheckBox'})`
 
 export const Button = styled.button`
   align-self: stretch;
-  appearance: button;
   background-color: transparent;
   background-image: linear-gradient(to bottom, #ebebeb, #ff0000);
   border: 0 solid #e5e7eb;
   border-radius: 0.5rem;
   box-sizing: border-box;
-  color: #482307;
+  color: #ffffff;
   column-gap: 1rem;
   cursor: pointer;
   display: flex;

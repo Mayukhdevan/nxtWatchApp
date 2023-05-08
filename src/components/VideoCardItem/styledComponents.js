@@ -47,7 +47,7 @@ export const CardLogo = styled.img`
     display: ${props => !props.homeRoute && 'none'};
   }
 `
-export const CardHeading = styled.h1`
+export const Paragraph = styled.p`
   font-size: 1rem;
   color: #231f20;
   font-weight: 500;

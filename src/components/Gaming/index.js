@@ -3,9 +3,9 @@ import Cookies from 'js-cookie'
 import {HiFire} from 'react-icons/hi'
 import Layout from '../Layout'
 import {STATUS, GAMING_API_URL} from '../../utils/constants'
-import VideoCardsList from '../VideoCardsList'
 import LoaderComp from '../LoaderComp'
 import Banner from '../Banner'
+import GameCardsList from '../GameCardsList'
 import {
   GamingContainer,
   GamingHeader,
@@ -14,7 +14,7 @@ import {
   GamingContentWrapper,
 } from './styledComponents'
 
-const getGamingVideos = async (setVideoList, setErr, setResStatus) => {
+const getGamingVideos = async (setGameList, setErr, setResStatus) => {
   setResStatus(STATUS.inProgress)
 
   const jwtToken = Cookies.get('jwt_token')
@@ -33,14 +33,9 @@ const getGamingVideos = async (setVideoList, setErr, setResStatus) => {
       id: eachData.id,
       title: eachData.title,
       thumbnailUrl: eachData.thumbnail_url,
-      channel: {
-        name: eachData.channel.name,
-        profileImageUrl: eachData.channel.profile_image_url,
-      },
       viewCount: eachData.view_count,
-      publishedAt: eachData.published_at,
     }))
-    setVideoList([...updatedData])
+    setGameList([...updatedData])
     setResStatus(STATUS.success)
   } else {
     setErr(data.error_msg)
@@ -49,18 +44,16 @@ const getGamingVideos = async (setVideoList, setErr, setResStatus) => {
 }
 
 export default function Gaming() {
-  const [videoList, setVideoList] = useState([])
+  const [gameList, setGameList] = useState([])
   const [resStatus, setResStatus] = useState(STATUS.initial)
   const [err, setErr] = useState('')
   const [showBanner, setShowBanner] = useState(true)
 
   useEffect(() => {
-    getGamingVideos(setVideoList, setErr, setResStatus)
+    getGamingVideos(setGameList, setErr, setResStatus)
   }, [])
 
-  const renderVideoCards = () => (
-    <VideoCardsList flex="column" homeRoute={false} videoList={videoList} />
-  )
+  const renderGameCards = () => <GameCardsList gameList={gameList} />
 
   const renderFailureView = () => <h1>Failed</h1>
 
@@ -71,7 +64,7 @@ export default function Gaming() {
       case STATUS.failure:
         return renderFailureView()
       default:
-        return renderVideoCards()
+        return renderGameCards()
     }
   }
 
@@ -83,7 +76,7 @@ export default function Gaming() {
           <GamingHeaderLogo>
             <HiFire style={{color: '#ff0b37'}} />
           </GamingHeaderLogo>
-          <GamingHeaderText>Trending</GamingHeaderText>
+          <GamingHeaderText>Gaming</GamingHeaderText>
         </GamingHeader>
         <GamingContentWrapper>{renderView()}</GamingContentWrapper>
       </GamingContainer>

@@ -1,4 +1,4 @@
-import {useHistory} from 'react-router-dom'
+import {useHistory, Link} from 'react-router-dom'
 import {BiSun} from 'react-icons/bi'
 import {FaMoon} from 'react-icons/fa'
 import {HiMenu} from 'react-icons/hi'
@@ -26,7 +26,9 @@ export default function Header({toggleNav}) {
 
   return (
     <HeaderContainer>
-      <HeaderLogo src={LIGHT_LOGO} alt="website logo" />
+      <Link to="/">
+        <HeaderLogo src={LIGHT_LOGO} alt="website logo" />
+      </Link>
       <UserOptionsWrapper>
         <ThemeButton data-testid="theme">
           <FaMoon style={{width: '16px', height: '16px'}} />

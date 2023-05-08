@@ -29,7 +29,7 @@ export default function Login() {
     const jwtToken = data?.jwt_token
     if (jwtToken) {
       Cookies.set('jwt_token', jwtToken, {expires: 30})
-      history.push('/')
+      history.replace('/')
     }
   }
 

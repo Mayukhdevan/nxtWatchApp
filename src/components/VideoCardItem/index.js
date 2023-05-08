@@ -5,7 +5,7 @@ import {
   CardThumbnail,
   CardDetailsWrapper,
   CardLogo,
-  CardHeading,
+  Paragraph,
   CardPara,
   TextWrapper,
 } from './styledComponents'
@@ -24,17 +24,17 @@ export default function VideoCardItem({videoCardItem, direction, homeRoute}) {
       <VideoLink to={`/videos/${id}`} direction={direction}>
         <CardThumbnail
           src={thumbnailUrl}
-          alt={channel.name}
+          alt="video thumbnail"
           direction={direction}
         />
         <CardDetailsWrapper>
           <CardLogo
             src={channel.profileImageUrl}
-            alt={channel.name}
+            alt="channel logo"
             homeRoute={homeRoute}
           />
           <TextWrapper>
-            <CardHeading>{title}</CardHeading>
+            <Paragraph>{title}</Paragraph>
             {homeRoute ? (
               <CardPara>
                 {channel.name} • {viewCount} •{' '}

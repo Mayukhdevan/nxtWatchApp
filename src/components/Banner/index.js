@@ -10,13 +10,13 @@ import {
 import {LIGHT_LOGO} from '../../utils/constants'
 
 const Banner = ({setShowBanner}) => (
-  <BannerContainer>
+  <BannerContainer data-testid="banner">
     <BannerContentWrapper>
-      <BannerLogo src={LIGHT_LOGO} alt="website logo" />
-      <Paragraph>Buy NxtWatch Premium prepaid pans with UPI</Paragraph>
+      <BannerLogo src={LIGHT_LOGO} alt="nxt watch logo" />
+      <Paragraph>Buy Nxt Watch Premium prepaid pans with UPI</Paragraph>
       <Button>GET IT NOW</Button>
     </BannerContentWrapper>
-    <CloseBannerBtn onClick={() => setShowBanner(false)}>
+    <CloseBannerBtn data-testid="colse" onClick={() => setShowBanner(false)}>
       <AiFillCloseSquare style={{width: '20px', height: '20px'}} />
     </CloseBannerBtn>
   </BannerContainer>
