@@ -13,8 +13,9 @@ import {
   TrendingHeaderText,
   TrendingContentWrapper,
 } from './styledComponents'
+import FailureView from '../FailureView'
 
-const getTrendingVideos = async (setVideoList, setErr, setResStatus) => {
+const getTrendingVideos = async (setVideoList, setResStatus) => {
   setResStatus(STATUS.inProgress)
 
   const jwtToken = Cookies.get('jwt_token')
@@ -43,7 +44,6 @@ const getTrendingVideos = async (setVideoList, setErr, setResStatus) => {
     setVideoList([...updatedData])
     setResStatus(STATUS.success)
   } else {
-    setErr(data.error_msg)
     setResStatus(STATUS.failure)
   }
 }
@@ -51,18 +51,19 @@ const getTrendingVideos = async (setVideoList, setErr, setResStatus) => {
 export default function Trending() {
   const [videoList, setVideoList] = useState([])
   const [resStatus, setResStatus] = useState(STATUS.initial)
-  const [err, setErr] = useState('')
   const [showBanner, setShowBanner] = useState(true)
 
   useEffect(() => {
-    getTrendingVideos(setVideoList, setErr, setResStatus)
+    getTrendingVideos(setVideoList, setResStatus)
   }, [])
+
+  const reload = () => getTrendingVideos(setVideoList, setResStatus)
 
   const renderVideoCards = () => (
     <VideoCardsList flex="column" homeRoute={false} videoList={videoList} />
   )
 
-  const renderFailureView = () => <h1>Failed</h1>
+  const renderFailureView = () => <FailureView retry={reload} />
 
   const renderView = () => {
     switch (resStatus) {

@@ -5,7 +5,7 @@ export const PlayerContainer = styled.div`
   width: 100%;
   aspect-ratio: 16/9;
 `
-export const Heading = styled.h1`
+export const ParaTitle = styled.p`
   font-size: 1rem;
   color: #64748b;
   margin-bottom: 1rem;
@@ -33,7 +33,7 @@ export const ControlButton = styled.button`
   cursor: pointer;
   font-weight: 500;
   font-size: 1rem;
-  color: ${props => (props.isActive ? ' #3b82f6' : '#616e7c')};
+  color: ${props => (props.isActive ? ' #2563eb' : '#64748b')};
 `
 export const Divider = styled.hr`
   margin-bottom: 2rem;

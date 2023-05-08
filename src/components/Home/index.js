@@ -15,12 +15,7 @@ import Banner from '../Banner'
 import EmptyResult from '../EmptyResult'
 import FailureView from '../FailureView'
 
-const getHomeVideos = async (
-  setVideoList,
-  setErr,
-  setResStatus,
-  searchInput = '',
-) => {
+const getHomeVideos = async (setVideoList, setResStatus, searchInput = '') => {
   setResStatus(STATUS.inProgress)
 
   const jwtToken = Cookies.get('jwt_token')
@@ -49,7 +44,6 @@ const getHomeVideos = async (
     setVideoList([...updatedData])
     setResStatus(STATUS.success)
   } else {
-    setErr(data.error_msg)
     setResStatus(STATUS.failure)
   }
 }
@@ -58,15 +52,14 @@ export default function Home() {
   const [searchInput, setSearchInput] = useState('')
   const [videoList, setVideoList] = useState([])
   const [resStatus, setResStatus] = useState(STATUS.initial)
-  const [err, setErr] = useState('')
   const [showBanner, setShowBanner] = useState(true)
 
   useEffect(() => {
-    getHomeVideos(setVideoList, setErr, setResStatus)
+    getHomeVideos(setVideoList, setResStatus)
   }, [])
 
   const handleSearch = () => {
-    getHomeVideos(setVideoList, setErr, setResStatus, searchInput)
+    getHomeVideos(setVideoList, setResStatus, searchInput)
   }
 
   const renderVideoCards = () =>

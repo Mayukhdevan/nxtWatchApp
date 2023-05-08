@@ -13,8 +13,9 @@ import {
   GamingHeaderText,
   GamingContentWrapper,
 } from './styledComponents'
+import FailureView from '../FailureView'
 
-const getGamingVideos = async (setGameList, setErr, setResStatus) => {
+const getGamingVideos = async (setGameList, setResStatus) => {
   setResStatus(STATUS.inProgress)
 
   const jwtToken = Cookies.get('jwt_token')
@@ -38,7 +39,6 @@ const getGamingVideos = async (setGameList, setErr, setResStatus) => {
     setGameList([...updatedData])
     setResStatus(STATUS.success)
   } else {
-    setErr(data.error_msg)
     setResStatus(STATUS.failure)
   }
 }
@@ -46,16 +46,17 @@ const getGamingVideos = async (setGameList, setErr, setResStatus) => {
 export default function Gaming() {
   const [gameList, setGameList] = useState([])
   const [resStatus, setResStatus] = useState(STATUS.initial)
-  const [err, setErr] = useState('')
   const [showBanner, setShowBanner] = useState(true)
 
   useEffect(() => {
-    getGamingVideos(setGameList, setErr, setResStatus)
+    getGamingVideos(setGameList, setResStatus)
   }, [])
+
+  const reload = () => getGamingVideos(setGameList, setResStatus)
 
   const renderGameCards = () => <GameCardsList gameList={gameList} />
 
-  const renderFailureView = () => <h1>Failed</h1>
+  const renderFailureView = () => <FailureView retry={reload} />
 
   const renderView = () => {
     switch (resStatus) {

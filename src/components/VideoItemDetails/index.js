@@ -7,7 +7,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import {STATUS, VIDEO_ITEM_URL} from '../../utils/constants'
 import {
   PlayerContainer,
-  Heading,
+  ParaTitle,
   Paragraph,
   ControlButton,
   Divider,
@@ -19,7 +19,7 @@ import {
 import Layout from '../Layout'
 import LoaderComp from '../LoaderComp'
 
-const getVideoDetails = async (id, setVideoDetails, setResStatus, setErr) => {
+const getVideoDetails = async (id, setVideoDetails, setResStatus) => {
   setResStatus(STATUS.inProgress)
 
   const jwtToken = Cookies.get('jwt_token')
@@ -52,7 +52,6 @@ const getVideoDetails = async (id, setVideoDetails, setResStatus, setErr) => {
     setVideoDetails(videoDetails)
     setResStatus(STATUS.success)
   } else {
-    setErr(data.error_msg)
     setResStatus(STATUS.failure)
   }
 }
@@ -60,7 +59,6 @@ const getVideoDetails = async (id, setVideoDetails, setResStatus, setErr) => {
 export default function VideoItemDetails() {
   const [videoDetails, setVideoDetails] = useState({})
   const [resStatus, setResStatus] = useState(STATUS.initial)
-  const [err, setErr] = useState('')
   const [likeDislike, setLikeDislike] = useState({like: false, dislike: false})
   const [save, setSave] = useState(false)
 
@@ -68,7 +66,7 @@ export default function VideoItemDetails() {
   const videoId = params.id
 
   useEffect(() => {
-    getVideoDetails(videoId, setVideoDetails, setResStatus, setErr)
+    getVideoDetails(videoId, setVideoDetails, setResStatus)
   }, [videoId])
 
   const renderVideoDetails = () => {
@@ -96,7 +94,7 @@ export default function VideoItemDetails() {
           />
         </PlayerContainer>
         <div style={{padding: '1rem'}}>
-          <Heading>{title}</Heading>
+          <ParaTitle>{title}</ParaTitle>
           <Paragraph>
             {viewCount} • {dateAgo}
           </Paragraph>
