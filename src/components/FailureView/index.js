@@ -11,7 +11,7 @@ export default function FailureView({retry}) {
     <FailureContainer>
       <FailureImage
         src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="no videos"
+        alt="failure view"
       />
       <FailureHeading>Oops! Something Went Wrong</FailureHeading>
       <FailurePara>

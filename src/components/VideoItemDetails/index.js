@@ -153,7 +153,7 @@ export default function VideoItemDetails() {
           </ControlBtnWrapper>
           <Divider />
           <ChannelContainer>
-            <ChannelLogo src={channel.profileImageUrl} alt={channel.name} />
+            <ChannelLogo src={channel.profileImageUrl} alt="channel logo" />
             <ChannelTextWrapper>
               <Paragraph mb="0.5rem" color="#1e293b">
                 {channel.name}

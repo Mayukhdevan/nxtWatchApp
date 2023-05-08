@@ -10,7 +10,7 @@ export default function NotFound() {
     <NotFoundContainer>
       <NotFoundImage
         src="https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-light-theme-img.png"
-        alt="no videos"
+        alt="not found"
       />
       <NotFoundHeading>Page Not Found</NotFoundHeading>
       <NotFoundPara>
