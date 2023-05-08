@@ -1,9 +1,10 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import ReactPlayer from 'react-player'
 import {BiDislike, BiLike, BiListPlus} from 'react-icons/bi'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import SavedVideosContext from '../../context/SavedVideosContext'
 import {STATUS, VIDEO_ITEM_URL} from '../../utils/constants'
 import {
   PlayerContainer,
@@ -18,6 +19,7 @@ import {
 } from './styledComponents'
 import Layout from '../Layout'
 import LoaderComp from '../LoaderComp'
+import FailureView from '../FailureView'
 
 const getVideoDetails = async (id, setVideoDetails, setResStatus) => {
   setResStatus(STATUS.inProgress)
@@ -61,13 +63,30 @@ export default function VideoItemDetails() {
   const [resStatus, setResStatus] = useState(STATUS.initial)
   const [likeDislike, setLikeDislike] = useState({like: false, dislike: false})
   const [save, setSave] = useState(false)
+  const {savedVideosList, updateSavedVideosList} = useContext(
+    SavedVideosContext,
+  )
 
+  console.log(savedVideosList)
   const params = useParams()
   const videoId = params.id
 
   useEffect(() => {
     getVideoDetails(videoId, setVideoDetails, setResStatus)
   }, [videoId])
+
+  useEffect(() => {
+    if (savedVideosList.includes(videoDetails)) {
+      setSave(true)
+    } else {
+      setSave(false)
+    }
+  }, [savedVideosList, videoDetails])
+
+  const handleSave = () => {
+    console.log('click')
+    updateSavedVideosList(videoDetails)
+  }
 
   const renderVideoDetails = () => {
     const {
@@ -125,7 +144,8 @@ export default function VideoItemDetails() {
             </ControlButton>
             <ControlButton
               isActive={save}
-              onClick={() => setSave(prevState => !prevState)}
+              onClick={handleSave}
+              //   onClick={() => setSave(prevState => !prevState)}
             >
               <BiListPlus style={{height: '22px', width: '22px'}} />
               Save
@@ -149,7 +169,9 @@ export default function VideoItemDetails() {
     )
   }
 
-  const renderFailureView = () => <h1>Failed</h1>
+  const reload = () => getVideoDetails(videoId, setVideoDetails, setResStatus)
+
+  const renderFailureView = () => <FailureView retry={reload} />
 
   const renderView = () => {
     switch (resStatus) {

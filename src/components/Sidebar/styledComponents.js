@@ -20,7 +20,7 @@ export const SidebarContainer = styled.div`
   height: 100%;
   min-width: 200px;
   padding-top: 3rem;
-  background-color: #f1f1f1;
+  background-color: #f9f9f9;
   @media (max-width: 767px) {
     transition: transform 0.5s ease-in-out;
     min-width: unset;
