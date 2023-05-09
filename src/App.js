@@ -14,22 +14,54 @@ import ProtectedRoute from './components/ProtectedRoute'
 // Replace your code here
 const App = () => {
   const [savedVideos, setSavedVideos] = useState([])
+  const [likeDislike, setLikeDislike] = useState([])
+
+  const found = (id, videos) =>
+    videos.find(eachVideo => eachVideo.id === savedVideos.id)
 
   const updateSavedVideos = videosData => {
-    console.log(videosData)
-    if (savedVideos.includes(videosData)) {
-      setSavedVideos(prevVideos =>
-        prevVideos.filter(eachVideo => eachVideo.id !== videosData.id),
-      )
-    } else {
+    const videoFound = found(videosData.id, savedVideos)
+
+    if (videoFound === undefined) {
       setSavedVideos(prevVideos => [...prevVideos, videosData])
+    } else {
+      setSavedVideos(prevVideos =>
+        prevVideos.filter(({id}) => id !== videosData.id),
+      )
     }
   }
+
+  const onLikeDislike = (video, action) => {
+    const videoFound = found(video.id, likeDislike)
+    if (videoFound !== undefined) {
+      if (action === 'like') {
+        videoFound.likeDislike = {
+          like: !videoFound.likeDislike.like,
+          dislike: false,
+        }
+      } else {
+        videoFound.likeDislike = {
+          like: false,
+          dislike: !videoFound.likeDislike.dislike,
+        }
+      }
+
+      setLikeDislike(prevVideos => [
+        ...prevVideos.filter(({id}) => id !== videoFound.id),
+        videoFound,
+      ])
+    } else {
+      setLikeDislike(prevVideos => [...prevVideos, videoFound])
+    }
+  }
+
   return (
     <SavedVideosContext.Provider
       value={{
         savedVideosList: savedVideos,
         updateSavedVideosList: updateSavedVideos,
+        likeDislikeList: likeDislike,
+        handleLikeDislike: onLikeDislike,
       }}
     >
       <Switch>

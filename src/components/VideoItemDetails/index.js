@@ -49,6 +49,7 @@ const getVideoDetails = async (id, setVideoDetails, setResStatus) => {
       viewCount: data?.video_details?.view_count,
       publishedAt: data?.video_details?.published_at,
       description: data?.video_details?.description,
+      likeDislike: {like: false, dislike: false},
     }
 
     setVideoDetails(videoDetails)
@@ -61,13 +62,14 @@ const getVideoDetails = async (id, setVideoDetails, setResStatus) => {
 export default function VideoItemDetails() {
   const [videoDetails, setVideoDetails] = useState({})
   const [resStatus, setResStatus] = useState(STATUS.initial)
-  const [likeDislike, setLikeDislike] = useState({like: false, dislike: false})
   const [save, setSave] = useState(false)
-  const {savedVideosList, updateSavedVideosList} = useContext(
-    SavedVideosContext,
-  )
+  const {
+    savedVideosList,
+    updateSavedVideosList,
+    likeDislikeList,
+    handleLikeDislike,
+  } = useContext(SavedVideosContext)
 
-  console.log(savedVideosList)
   const params = useParams()
   const videoId = params.id
 
@@ -76,7 +78,8 @@ export default function VideoItemDetails() {
   }, [videoId])
 
   useEffect(() => {
-    if (savedVideosList.includes(videoDetails)) {
+    const found = savedVideosList.find(({id}) => id === videoDetails.id)
+    if (found) {
       setSave(true)
     } else {
       setSave(false)
@@ -84,8 +87,17 @@ export default function VideoItemDetails() {
   }, [savedVideosList, videoDetails])
 
   const handleSave = () => {
-    console.log('click')
     updateSavedVideosList(videoDetails)
+  }
+
+  const isLiked = () => {
+    const found = likeDislikeList.find(({id}) => id === videoDetails.id)
+    return found.like
+  }
+
+  const isDisLiked = () => {
+    const found = likeDislikeList.find(({id}) => id === videoDetails.id)
+    return found.dislike
   }
 
   const renderVideoDetails = () => {
@@ -119,34 +131,20 @@ export default function VideoItemDetails() {
           </Paragraph>
           <ControlBtnWrapper>
             <ControlButton
-              isActive={likeDislike.like}
-              onClick={() =>
-                setLikeDislike(prevState => ({
-                  like: !prevState.like,
-                  dislike: false,
-                }))
-              }
+              isActive={isLiked()}
+              onClick={() => handleLikeDislike(videoDetails, 'like')}
             >
               <BiLike style={{height: '22px', width: '22px'}} />
               Like
             </ControlButton>
             <ControlButton
-              isActive={likeDislike.dislike}
-              onClick={() =>
-                setLikeDislike(prevState => ({
-                  like: false,
-                  dislike: !prevState.dislike,
-                }))
-              }
+              isActive={isDisLiked()}
+              onClick={() => handleLikeDislike(videoDetails, 'dislike')}
             >
               <BiDislike style={{height: '22px', width: '22px'}} />
               Dislike
             </ControlButton>
-            <ControlButton
-              isActive={save}
-              onClick={handleSave}
-              //   onClick={() => setSave(prevState => !prevState)}
-            >
+            <ControlButton isActive={save} onClick={handleSave}>
               <BiListPlus style={{height: '22px', width: '22px'}} />
               Save
             </ControlButton>
