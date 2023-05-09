@@ -28,7 +28,7 @@ export default function Trending() {
   return (
     <Layout>
       {showBanner && <Banner setShowBanner={setShowBanner} />}
-      <SavedVideosContainer>
+      <SavedVideosContainer data-testid="savedVideos">
         {savedVideosList.length === 0 ? (
           <NoSavedVideos />
         ) : (

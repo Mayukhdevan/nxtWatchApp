@@ -5,7 +5,7 @@ export const Nav = styled(NavLink)`
   text-decoration: none;
   color: #7e858e;
   &.active {
-    background-color: #cbd5e1;
+    background-color: ${({theme}) => theme.body.active};
     font-weight: 500;
     color: #212121;
   }
@@ -20,7 +20,7 @@ export const SidebarContainer = styled.div`
   height: 100%;
   min-width: 200px;
   padding-top: 3rem;
-  background-color: #f9f9f9;
+  background-color: ${({theme}) => theme.body.strong};
   @media (max-width: 767px) {
     transition: transform 0.5s ease-in-out;
     min-width: unset;
@@ -43,6 +43,7 @@ export const NavItem = styled.li`
 `
 export const Footer = styled.div`
   padding: 1rem;
+  color: ${({theme}) => theme.color.soft};
 `
 export const Paragraph = styled.p`
   font-weight: ${props => props.fontWeight || 500};

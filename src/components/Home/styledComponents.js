@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const HomeContentWrapper = styled.div`
   //   background-color: #f1f5f9;
-  background-color: ${({theme}) => theme.body.primary};
+  background-color: ${({theme}) => theme.body.secondary};
   flex-grow: 1;
   padding: 1rem;
   @media (min-width: 768px) {

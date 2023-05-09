@@ -29,7 +29,7 @@ export default function Header({toggleNav}) {
 
   const logout = () => {
     Cookies.remove('jwt_token')
-    history.replace('/')
+    history.replace('/login')
   }
 
   return (
@@ -55,7 +55,7 @@ export default function Header({toggleNav}) {
         >
           {close => (
             <ModalBody>
-              <ModalText>Are you sure you want to logout?</ModalText>
+              <ModalText>Are you sure, you want to logout</ModalText>
               <ModalButtonsWrapper>
                 <ModalBtn outline onClick={close}>
                   Cancel
@@ -78,7 +78,7 @@ export default function Header({toggleNav}) {
         >
           {close => (
             <ModalBody>
-              <ModalText>Are you sure you want to logout?</ModalText>
+              <ModalText>Are you sure, you want to logout</ModalText>
               <ModalButtonsWrapper>
                 <ModalBtn outline onClick={close}>
                   Cancel

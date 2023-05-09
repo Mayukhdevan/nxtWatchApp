@@ -8,6 +8,7 @@ export const NoSavedContainer = styled.div`
   align-items: center;
   gap: 0.5rem;
   text-align: center;
+  background-color: ${({theme}) => theme.body.primary};
 `
 export const NoSavedImage = styled.img`
   margin-bottom: 1rem;
@@ -15,10 +16,10 @@ export const NoSavedImage = styled.img`
 `
 export const NoSavedHeading = styled.h1`
   font-size: 1.4rem;
-  color: #1e293b;
+  color: ${({theme}) => theme.color.primary};
 `
 export const NoSavedPara = styled.p`
-  color: #475569;
+  color: ${({theme}) => theme.color.secondary};
   font-weight: 500;
   margin-bottom: 1.5rem;
 `

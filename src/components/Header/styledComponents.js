@@ -6,6 +6,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.5rem;
+  background-color: ${({theme}) => theme.body.strong};
 `
 export const HeaderLogo = styled.img`
   width: 100px;
@@ -24,6 +25,7 @@ export const ThemeButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  color: ${({theme}) => theme.color.primary};
 `
 export const UserLogo = styled.img`
   width: 20px;
@@ -52,6 +54,7 @@ export const LogoutIconBtn = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: ${({theme}) => theme.color.primary};
   @media (min-width: 768px) {
     display: none;
   }
@@ -59,7 +62,6 @@ export const LogoutIconBtn = styled.button`
 export const HamIconBtn = styled(LogoutIconBtn)``
 
 export const ModalBody = styled.div`
-  background-color: white;
   padding: 1rem;
   border-radius: 8px;
   justify-content: center;
@@ -70,9 +72,10 @@ export const ModalBody = styled.div`
   width: 300px;
   height: 180px;
   box-shadow: 2px 2px 8px 8px rgb(0, 0, 0, 0.2);
+  background-color: ${({theme}) => theme.body.soft};
 `
 export const ModalText = styled.p`
-  color: #00306e;
+  color: ${({theme}) => theme.color.modal};
   font-weight: 500;
 `
 export const ModalButtonsWrapper = styled.div`

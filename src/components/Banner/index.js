@@ -16,7 +16,7 @@ const Banner = ({setShowBanner}) => (
       <Paragraph>Buy Nxt Watch Premium prepaid pans with UPI</Paragraph>
       <Button>GET IT NOW</Button>
     </BannerContentWrapper>
-    <CloseBannerBtn data-testid="colse" onClick={() => setShowBanner(false)}>
+    <CloseBannerBtn data-testid="close" onClick={() => setShowBanner(false)}>
       <AiFillCloseSquare style={{width: '20px', height: '20px'}} />
     </CloseBannerBtn>
   </BannerContainer>

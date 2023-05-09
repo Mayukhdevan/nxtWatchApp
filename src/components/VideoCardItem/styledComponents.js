@@ -49,10 +49,11 @@ export const CardLogo = styled.img`
 `
 export const Paragraph = styled.p`
   font-size: 1rem;
-  color: #231f20;
+  color: ${({theme}) => theme.color.primary};
   font-weight: 500;
 `
 export const CardPara = styled.p`
   color: #94a3b8;
+  color: ${({theme}) => theme.color.secondary};
   font-size: 0.9rem;
 `

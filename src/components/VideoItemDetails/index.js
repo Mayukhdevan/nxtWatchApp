@@ -7,6 +7,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import SavedVideosContext from '../../context/SavedVideosContext'
 import {STATUS, VIDEO_ITEM_URL} from '../../utils/constants'
 import {
+  VideoItemDetailsBg,
   PlayerContainer,
   ParaTitle,
   Paragraph,
@@ -121,12 +122,12 @@ export default function VideoItemDetails() {
       publishedAt,
       description,
     } = videoDetails
-    const dateAgo = formatDistanceToNow(new Date(publishedAt), {
-      addSuffix: true,
-    })
+    // const dateAgo = formatDistanceToNow(new Date(publishedAt), {
+    //   addSuffix: true,
+    // })
 
     return (
-      <>
+      <VideoItemDetailsBg data-testid="videoItemDetails">
         <PlayerContainer>
           <ReactPlayer
             width="100%"
@@ -139,7 +140,7 @@ export default function VideoItemDetails() {
         <div style={{padding: '1rem'}}>
           <ParaTitle>{title}</ParaTitle>
           <Paragraph>
-            {viewCount} • {dateAgo}
+            {viewCount} • {publishedAt}
           </Paragraph>
           <ControlBtnWrapper>
             <ControlButton
@@ -175,7 +176,7 @@ export default function VideoItemDetails() {
           </ChannelContainer>
           <Paragraph color="#64748b">{description}</Paragraph>
         </div>
-      </>
+      </VideoItemDetailsBg>
     )
   }
 

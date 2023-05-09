@@ -11,12 +11,13 @@ export const LayoutWrapper = styled.div`
   flex-grow: 1;
   position: relative;
   perspective: 500px;
-  //   background-color: #475569;
+  background-color: ${({theme}) => theme.body.soft};
 `
 export const ContentContainer = styled.div`
   width: 100%;
-  height: 92vh;
+  height: 92.7vh;
   overflow-y: auto;
+  background-color: ${({theme}) => theme.body.primary};
   transition: 0.5s ease-in-out;
   @media (max-width: 767px) {
     transform-origin: right;

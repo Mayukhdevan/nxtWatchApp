@@ -14,6 +14,7 @@ import LoaderComp from '../LoaderComp'
 import Banner from '../Banner'
 import EmptyResult from '../EmptyResult'
 import FailureView from '../FailureView'
+import Header from '../Header'
 
 const getHomeVideos = async (setVideoList, setResStatus, searchInput = '') => {
   setResStatus(STATUS.inProgress)
@@ -85,7 +86,8 @@ export default function Home() {
   return (
     <Layout>
       {showBanner && <Banner setShowBanner={setShowBanner} />}
-      <HomeContentWrapper>
+      <HomeContentWrapper data-testid="home">
+        <Header />
         <SearchInputWrapper>
           <SearchInput
             type="search"

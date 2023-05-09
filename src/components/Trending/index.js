@@ -14,6 +14,7 @@ import {
   TrendingContentWrapper,
 } from './styledComponents'
 import FailureView from '../FailureView'
+import Header from '../Header'
 
 const getTrendingVideos = async (setVideoList, setResStatus) => {
   setResStatus(STATUS.inProgress)
@@ -89,7 +90,10 @@ export default function Trending() {
   return (
     <Layout>
       {showBanner && <Banner setShowBanner={setShowBanner} />}
-      <TrendingContainer>{renderView()}</TrendingContainer>
+      <TrendingContainer data-testid="trending">
+        <Header />
+        {renderView()}
+      </TrendingContainer>
     </Layout>
   )
 }

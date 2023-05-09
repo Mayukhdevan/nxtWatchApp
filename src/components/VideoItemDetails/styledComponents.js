@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+export const VideoItemDetailsBg = styled.div`
+  background-color: ${({theme}) => theme.body.primary};
+`
+
 export const PlayerContainer = styled.div`
   position: relative;
   width: 100%;
@@ -7,7 +11,7 @@ export const PlayerContainer = styled.div`
 `
 export const ParaTitle = styled.p`
   font-size: 1rem;
-  color: #64748b;
+  color: ${({theme}) => theme.color.primary};
   margin-bottom: 1rem;
 `
 export const Paragraph = styled.p`

@@ -13,7 +13,7 @@ export default function NoSavedVideos() {
         alt="no saved videos"
       />
       <NoSavedHeading>No saved videos found</NoSavedHeading>
-      <NoSavedPara>You ca save your videos while watching them</NoSavedPara>
+      <NoSavedPara>Save your videos by clicking a button</NoSavedPara>
     </NoSavedContainer>
   )
 }

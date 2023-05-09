@@ -38,13 +38,14 @@ export default function VideoCardItem({videoCardItem, direction, homeRoute}) {
             {homeRoute ? (
               <CardPara>
                 {channel.name} • {viewCount} •{' '}
-                {formatDistanceToNow(new Date(publishedAt))}
+                {/* {formatDistanceToNow(new Date(publishedAt))} */}
+                {publishedAt}
               </CardPara>
             ) : (
               <>
                 <CardPara>{channel.name}</CardPara>
                 <CardPara>
-                  {viewCount} • {formatDistanceToNow(new Date(publishedAt))}
+                  {viewCount} • {publishedAt}
                 </CardPara>
               </>
             )}

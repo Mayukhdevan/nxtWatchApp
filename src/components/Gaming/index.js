@@ -84,7 +84,7 @@ export default function Gaming() {
   return (
     <Layout>
       {showBanner && <Banner setShowBanner={setShowBanner} />}
-      <GamingContainer>{renderView()}</GamingContainer>
+      <GamingContainer data-testid="gaming">{renderView()}</GamingContainer>
     </Layout>
   )
 }
