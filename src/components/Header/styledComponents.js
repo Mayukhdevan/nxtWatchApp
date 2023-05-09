@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -57,3 +57,43 @@ export const LogoutIconBtn = styled.button`
   }
 `
 export const HamIconBtn = styled(LogoutIconBtn)``
+
+export const ModalBody = styled.div`
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  width: 300px;
+  height: 180px;
+  box-shadow: 2px 2px 8px 8px rgb(0, 0, 0, 0.2);
+`
+export const ModalText = styled.p`
+  color: #00306e;
+  font-weight: 500;
+`
+export const ModalButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.5rem;
+`
+export const ModalBtn = styled.button`
+  padding: 0.7rem 1.5rem;
+  color: white;
+  background-color: #3b82f6;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+  ${props =>
+    props.outline &&
+    css`
+      color: #7e858e;
+      background-color: transparent;
+      border: 2px solid #7e858e;
+    `}
+`

@@ -60,7 +60,17 @@ export default function Trending() {
   const reload = () => getTrendingVideos(setVideoList, setResStatus)
 
   const renderVideoCards = () => (
-    <VideoCardsList flex="column" homeRoute={false} videoList={videoList} />
+    <>
+      <TrendingHeader>
+        <TrendingHeaderLogo>
+          <HiFire style={{color: '#ff0b37'}} />
+        </TrendingHeaderLogo>
+        <TrendingHeaderText>Trending</TrendingHeaderText>
+      </TrendingHeader>
+      <TrendingContentWrapper>
+        <VideoCardsList flex="column" homeRoute={false} videoList={videoList} />
+      </TrendingContentWrapper>
+    </>
   )
 
   const renderFailureView = () => <FailureView retry={reload} />
@@ -79,15 +89,7 @@ export default function Trending() {
   return (
     <Layout>
       {showBanner && <Banner setShowBanner={setShowBanner} />}
-      <TrendingContainer>
-        <TrendingHeader>
-          <TrendingHeaderLogo>
-            <HiFire style={{color: '#ff0b37'}} />
-          </TrendingHeaderLogo>
-          <TrendingHeaderText>Trending</TrendingHeaderText>
-        </TrendingHeader>
-        <TrendingContentWrapper>{renderView()}</TrendingContentWrapper>
-      </TrendingContainer>
+      <TrendingContainer>{renderView()}</TrendingContainer>
     </Layout>
   )
 }

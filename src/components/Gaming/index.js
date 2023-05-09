@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import Cookies from 'js-cookie'
-import {HiFire} from 'react-icons/hi'
+import {SiYoutubegaming} from 'react-icons/si'
 import Layout from '../Layout'
 import {STATUS, GAMING_API_URL} from '../../utils/constants'
 import LoaderComp from '../LoaderComp'
@@ -54,7 +54,19 @@ export default function Gaming() {
 
   const reload = () => getGamingVideos(setGameList, setResStatus)
 
-  const renderGameCards = () => <GameCardsList gameList={gameList} />
+  const renderGameCards = () => (
+    <>
+      <GamingHeader>
+        <GamingHeaderLogo>
+          <SiYoutubegaming style={{color: '#ff0b37'}} />
+        </GamingHeaderLogo>
+        <GamingHeaderText>Gaming</GamingHeaderText>
+      </GamingHeader>
+      <GamingContentWrapper>
+        <GameCardsList gameList={gameList} />
+      </GamingContentWrapper>
+    </>
+  )
 
   const renderFailureView = () => <FailureView retry={reload} />
 
@@ -72,15 +84,7 @@ export default function Gaming() {
   return (
     <Layout>
       {showBanner && <Banner setShowBanner={setShowBanner} />}
-      <GamingContainer>
-        <GamingHeader>
-          <GamingHeaderLogo>
-            <HiFire style={{color: '#ff0b37'}} />
-          </GamingHeaderLogo>
-          <GamingHeaderText>Gaming</GamingHeaderText>
-        </GamingHeader>
-        <GamingContentWrapper>{renderView()}</GamingContentWrapper>
-      </GamingContainer>
+      <GamingContainer>{renderView()}</GamingContainer>
     </Layout>
   )
 }

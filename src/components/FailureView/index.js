@@ -1,3 +1,4 @@
+import {useContext} from 'react'
 import {
   FailureContainer,
   FailureImage,
@@ -5,12 +6,15 @@ import {
   FailurePara,
   FailureBtn,
 } from './styledComponents'
+import ThemeContext from '../../context/ThemeContext'
+import {FAILURE_LIGHT_IMG, FAILURE_DARK_IMG} from '../../utils/constants'
 
 export default function FailureView({retry}) {
+  const {mode} = useContext(ThemeContext)
   return (
     <FailureContainer>
       <FailureImage
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+        src={mode === 'light' ? FAILURE_LIGHT_IMG : FAILURE_DARK_IMG}
         alt="failure view"
       />
       <FailureHeading>Oops! Something Went Wrong</FailureHeading>

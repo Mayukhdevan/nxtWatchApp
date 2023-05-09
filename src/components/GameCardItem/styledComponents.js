@@ -15,6 +15,7 @@ export const VideoLink = styled(Link)`
 `
 export const CardThumbnail = styled.img`
   width: 100%;
+  flex-shrink: 0;
 `
 export const TextWrapper = styled.div`
   display: flex;

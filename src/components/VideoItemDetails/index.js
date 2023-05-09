@@ -69,7 +69,7 @@ export default function VideoItemDetails() {
     likeDislikeList,
     handleLikeDislike,
   } = useContext(SavedVideosContext)
-
+  console.log(savedVideosList)
   const params = useParams()
   const videoId = params.id
 
@@ -78,7 +78,7 @@ export default function VideoItemDetails() {
   }, [videoId])
 
   useEffect(() => {
-    const found = savedVideosList.find(({id}) => id === videoDetails.id)
+    const found = savedVideosList.find(item => item.id === videoDetails.id)
     if (found) {
       setSave(true)
     } else {
@@ -86,18 +86,30 @@ export default function VideoItemDetails() {
     }
   }, [savedVideosList, videoDetails])
 
+  useEffect(() => {}, [likeDislikeList])
+
   const handleSave = () => {
     updateSavedVideosList(videoDetails)
   }
 
   const isLiked = () => {
-    const found = likeDislikeList.find(({id}) => id === videoDetails.id)
-    return found.like
+    if (likeDislikeList.length !== 0) {
+      const found = likeDislikeList.find(item => item.id === videoDetails.id)
+      if (found) {
+        return found.likeDislike.like
+      }
+    }
+    return false
   }
 
   const isDisLiked = () => {
-    const found = likeDislikeList.find(({id}) => id === videoDetails.id)
-    return found.dislike
+    if (!likeDislikeList.length !== 0) {
+      const found = likeDislikeList.find(item => item.id === videoDetails.id)
+      if (found) {
+        return found.likeDislike.dislike
+      }
+    }
+    return false
   }
 
   const renderVideoDetails = () => {
@@ -146,7 +158,7 @@ export default function VideoItemDetails() {
             </ControlButton>
             <ControlButton isActive={save} onClick={handleSave}>
               <BiListPlus style={{height: '22px', width: '22px'}} />
-              Save
+              {save ? 'Saved' : 'Save'}
             </ControlButton>
           </ControlBtnWrapper>
           <Divider />

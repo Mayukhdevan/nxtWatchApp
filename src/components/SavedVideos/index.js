@@ -11,32 +11,39 @@ import {
   SavedVideosHeaderText,
   SavedVideosContentWrapper,
 } from './styledComponents'
+import NoSavedVideos from '../NoSavedVideos'
 
 export default function Trending() {
   const [showBanner, setShowBanner] = useState(true)
   const {savedVideosList} = useContext(SavedVideosContext)
 
-  //   const renderVideoCards = () => (
-  //     <VideoCardsList
-  //       flex="column"
-  //       homeRoute={false}
-  //       videoList={savedVideosList}
-  //     />
-  //   )
+  const renderVideoCards = () => (
+    <VideoCardsList
+      flex="column"
+      homeRoute={false}
+      videoList={savedVideosList}
+    />
+  )
 
   return (
     <Layout>
       {showBanner && <Banner setShowBanner={setShowBanner} />}
       <SavedVideosContainer>
-        <SavedVideosHeader>
-          <SavedVideosHeaderLogo>
-            <HiFire style={{color: '#ff0b37'}} />
-          </SavedVideosHeaderLogo>
-          <SavedVideosHeaderText>Trending</SavedVideosHeaderText>
-        </SavedVideosHeader>
-        <SavedVideosContentWrapper>
-          {/* {savedVideosList.length !== 0 ? renderVideoCards() : null} */}
-        </SavedVideosContentWrapper>
+        {savedVideosList.length === 0 ? (
+          <NoSavedVideos />
+        ) : (
+          <>
+            <SavedVideosHeader>
+              <SavedVideosHeaderLogo>
+                <HiFire style={{color: '#ff0b37'}} />
+              </SavedVideosHeaderLogo>
+              <SavedVideosHeaderText>Saved Videos</SavedVideosHeaderText>
+            </SavedVideosHeader>
+            <SavedVideosContentWrapper>
+              {renderVideoCards()}
+            </SavedVideosContentWrapper>
+          </>
+        )}
       </SavedVideosContainer>
     </Layout>
   )
