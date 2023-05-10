@@ -24,7 +24,7 @@ export const SearchInput = styled.input`
   border-radius: 15px 0 0 15px;
   //   background-color: #e2e8f0;
   background-color: ${({theme}) => theme.body.soft};
-  color: ${({theme}) => theme.body.soft};
+  color: ${({theme}) => theme.color.soft};
   &:focus {
     outline: 1.5px solid #64748b;
     border-right: 1.5px solid #64748b;

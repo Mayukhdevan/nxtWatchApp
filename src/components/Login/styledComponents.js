@@ -5,12 +5,12 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f9f9f9;
+  background-color: ${({theme}) => theme.body.primary};
   min-height: 100vh;
 `
 
 export const LoginCard = styled.div`
-  background-color: #f9f9f9;
+  background-color: ${({theme}) => theme.body.secondary};
   box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
   padding: 2rem 1rem;
   border-radius: 10px;
@@ -54,7 +54,7 @@ export const InputField = styled.div`
 `
 
 export const Label = styled.label`
-  color: #94a3b8;
+  color: ${({theme}) => theme.color.soft};
   font-weight: 500;
   font-size: 0.8rem;
   letter-spacing: -0.5px;
@@ -124,11 +124,13 @@ export const Button = styled.button`
 
   &:active {
     background: #f3f4f6;
+    color: black;
     transform: translateY(3px);
   }
 
   &:focus {
     background: #f3f4f6;
+    color: black;
   }
 `
 
