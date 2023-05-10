@@ -91,7 +91,6 @@ export default function Trending() {
     <Layout>
       {showBanner && <Banner setShowBanner={setShowBanner} />}
       <TrendingContainer data-testid="trending">
-        <Header />
         {renderView()}
       </TrendingContainer>
     </Layout>

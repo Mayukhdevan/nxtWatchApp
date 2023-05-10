@@ -87,7 +87,6 @@ export default function Home() {
     <Layout>
       {showBanner && <Banner setShowBanner={setShowBanner} />}
       <HomeContentWrapper data-testid="home">
-        <Header />
         <SearchInputWrapper>
           <SearchInput
             type="search"
