@@ -49,10 +49,7 @@ export default function Header({toggleNav}) {
           )}
         </ThemeButton>
         <UserLogo src={PROFILE_LOGO} alt="profile" />
-        <Popup
-          trigger={<LogoutButton onClick={logout}>Logout</LogoutButton>}
-          modal
-        >
+        <Popup trigger={<LogoutButton>Logout</LogoutButton>} modal>
           {close => (
             <ModalBody>
               <ModalText>Are you sure, you want to logout</ModalText>
